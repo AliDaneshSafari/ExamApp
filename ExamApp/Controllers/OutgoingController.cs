@@ -18,7 +18,7 @@ namespace ExamApp.Controllers
         }
         public IActionResult Index()
         {
-            return View(_contxt.trackers.ToList());
+            return View(_contxt.trackers.Include(t=>t.atachFiles).ToList());
         }
         public IActionResult Create()
         {
@@ -69,6 +69,20 @@ namespace ExamApp.Controllers
 
         }
 
-        
+        public IActionResult FinallySend(int id)
+        {
+            var data = _contxt.trackers.Find(id);
+            if (data == null)
+            {
+                return NotFound();
+            }
+            data.isApprove = true;
+            _contxt.trackers.Update(data);
+            _contxt.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
 }
 }

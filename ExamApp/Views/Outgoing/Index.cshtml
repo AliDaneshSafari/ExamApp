@@ -20,9 +20,23 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.CreateDate)
+                                @Html.DisplayNameFor(model => model.Out_Number)
                             </th>
-                           
+                            <th>
+                                @Html.DisplayNameFor(model => model.Subject)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Out_Date)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Remark)
+                            </th>
+                            <th>
+                                ضمیمه
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.isApprove)
+                            </th>
                             <th>
 
                                 <a asp-action="Create" class="btn btn-primary btn-sm">ثبت صادره جدید </a>
@@ -34,13 +48,47 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>
-                                    @*<img src="/Images/@item.ImagePath" style="width:50px;">*@
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CreateDate)
-                                </td>
                                 
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Out_Number)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Subject)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Out_Date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Remark)
+                                </td>
+                                <td>
+                                    @{
+                                        if (item.atachFiles.Count > 0)
+                                        {
+                                            <div>دارد</div>
+                                        }
+                                        else
+                                        {
+                                            <div>ندارد</div>
+                                        }
+
+                                    }
+                                </td>
+                                <td>
+                                    
+                                    @{
+                                        if (item.isApprove==true)
+                                        {
+                                            <div class="text-success">ارسال شده</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="text-danger">هنوز ارسال نشده</div>
+                                        }
+                                    }
+                                   
+
+                                </td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-white  btn-xs">گزینه ها</button>
@@ -63,14 +111,10 @@
                                                     <i class="icon-remove"></i> حذف
                                                 </a>
                                             </li>
+                                           
                                             <li>
-                                                <a asp-action="PaidSalary" asp-route-id="@item.Id">
-                                                    <i class="icon-dollar"></i> پرداخت معاش
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a asp-action="AdvanceSalary" asp-route-id="@item.Id">
-                                                    <i class="icon-dollar"></i> پیش پرداخت
+                                                <a asp-action="FinallySend" asp-route-id="@item.Id">
+                                                    <i class="icon-list"></i>ارسال شود
                                                 </a>
                                             </li>
 

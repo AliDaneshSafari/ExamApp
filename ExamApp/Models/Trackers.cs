@@ -44,8 +44,13 @@ namespace ExamApp
         public int? UserId { get; set; }
 
 
+        [Display(Name = "وضعیت مکتوب ")]
+        public bool? isApprove { get; set; } = false;
+       
+        public List<AtachFile> atachFiles { get; set; } 
 
-      
+
+
 
 
 
