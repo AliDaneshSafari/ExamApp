@@ -1,0 +1,357 @@
+﻿@*@using ProductApp.Utility;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var currentUserId = UserManager.GetUserId(User);
+    var user = UserManager.Users.Where(a => a.Id == currentUserId).FirstOrDefault();
+*@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="img/favicon.html">
+
+    <title>SmartBazar</title>
+    <link rel="stylesheet" href="~/AdminPanel/DatePicker/jalalidatepicker.css" />
+    <!-- Bootstrap core CSS -->
+    <link href="~/AdminPanel/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/AdminPanel/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="~/AdminPanel/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <link href="~/AdminPanel/assets/bootstrap-datepicker/css/datepicker.css" />
+    <link href="~/AdminPanel/assets/bootstrap-colorpicker/css/colorpicker.css" />
+    <!-- Custom styles for this template -->
+    <link href="~/AdminPanel/css/style.css" rel="stylesheet">
+    <link href="~/AdminPanel/css/style-responsive.css" rel="stylesheet" />
+
+    <link href="~/Select2/select2.min.css" rel="stylesheet" />
+    <link href="/css/UtilityStyle.css" rel="stylesheet" />
+    <link href="~/adminpanel/css/themes_blitzer_jquery-ui.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+
+    <![endif]-->
+    <style>
+        span {
+            font-size: 15px;
+        }
+
+        a.logo span {
+            color: #63d12a;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 34px !important;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <section id="container" class="">
+        <!--header start-->
+        <header class="header white-bg">
+
+            <div class="sidebar-toggle-box">
+                <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+            </div>
+            <!--logo start-->
+            <a href="/" class="logo">سیستم <span> مکاتبات وزارت مخابرات</span></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+            </div>
+            <div class="top-nav ">
+                <!--search & user info start-->
+                <ul class="nav pull-right top-menu">
+                    <li>
+                        <input type="text" class="form-control search" placeholder="Search">
+                    </li>
+
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            @*<img alt="" src="/Images/@user.ImagePath" style="width:34px;height:28px;">*@
+                            <span class="username">
+@*                                <span style="font-weight:normal!important;" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @user.FirstName @user.LastName</span>
+*@
+                            </span>
+
+                            <b class="caret"></b>
+                        </a>
+
+
+
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <li>
+                                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                                    <i class=" icon-suitcase"></i>
+                                    پروفایل
+
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="User" asp-action="Index">
+                                    <i class="icon-user"></i>لیست کاربران
+                                </a>
+                            </li>
+                            <li><a href="#"><i class="icon-bell-alt"></i>اعلام ها</a></li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-key"></i>
+
+                                   @* @if (SignInManager.IsSignedIn(User))
+                                    {
+                                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                            <button type="submit" class="nav-link btn btn-link text-dark">خروج</button>
+                                        </form>
+                                    }*@
+
+
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+
+                    <!-- user login dropdown end -->
+                    <li style="float:right">
+                       @* <partial name="_LoginPartial" />*@
+                    </li>
+
+
+                </ul>
+
+                <!--search & user info end-->
+            </div>
+        </header>
+        <!--header end-->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu">
+                    <li class="active">
+                        <a class="" href="/">
+                            <i class="icon-dashboard"></i>
+                            <span>صفحه اصلی</span>
+                        </a>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon-th"></i>
+                            <span>دیپارتمنت ها</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" asp-area="" asp-controller="Department" asp-action="Index">لیست دیپارتمنت ها</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon-money"></i>
+                            <span>صندوق</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" asp-area="" asp-controller="Cash" asp-action="Index">پول صندوق</a></li>
+                            <li><a class="" asp-area="" asp-controller="Cash" asp-action="CashClose">بستن صندوق</a></li>
+                            <li><a class="" asp-area="" asp-controller="Cash" asp-action="CashClosedList">گزارش صندوق روز های قبل</a></li>
+
+
+
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon-backward"></i>
+                            <span>خرید ها</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" asp-area="" asp-controller="PurchaseOrder" asp-action="Create">ثبت خرید </a></li>
+                            <li><a class="" asp-area="" asp-controller="PurchaseOrder" asp-action="Index">لیست خرید </a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon-forward"></i>
+                            <span>فروشات</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" asp-area="" asp-controller="PurchaseSales" asp-action="Create">ثبت فروشات نقدی </a></li>
+                            <li><a class="" asp-area="" asp-controller="PurchaseSales" asp-action="Index">لیست فروشات نقدی </a></li>
+                            <li><a class="" asp-area="" asp-controller="PurchaseSalesWriteCheck" asp-action="Index">ثبت فروشات نسیه </a></li>
+                            <li><a class="" asp-area="" asp-controller="PurchaseSalesWriteCheck" asp-action="Index">لیست فروشات نسیه </a></li>
+
+
+
+
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon-th"></i>
+                            <span>مصارف</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" asp-area="Admin" asp-controller="ExpensTypes" asp-action="Index">نوع مصارف</a></li>
+                            <li><a class="" asp-area="Admin" asp-controller="Expens" asp-action="Index">مصارفات</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon-shopping-cart"></i>
+                            <span>ثبت اجناس</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" asp-area="Admin" asp-controller="ProductTypes" asp-action="Index">نوع اجناس</a></li>
+
+                            <li><a class="" asp-area="Admin" asp-controller="Products" asp-action="Index">اجناس</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon-tasks"></i>
+                            <span>مشتری یا فروشنده</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" asp-area="Admin" asp-controller="Customers" asp-action="Index">فروشنده</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon-tasks"></i>
+                            <span>پروفایل فروشگاه</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" asp-area="Admin" asp-controller="Profile" asp-action="Index">مشخصات دوکان</a></li>
+                            <li><a class="" asp-area="" asp-controller="Home" asp-action="BackUpDbFile">مدیریت بکاپ</a></li>
+                            <li><a class="" asp-area="Admin" asp-controller="Units" asp-action="Index">واحد ها</a></li>
+                            <li><a asp-area="Admin" asp-controller="Currency" asp-action="Index"><i class="icon-dollar"></i>واحد پولی</a></li>
+
+                        </ul>
+
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon-list"></i>
+                            <span>مالکین</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" asp-area="Admin" asp-controller="Owner" asp-action="Index"><i class="icon-list"></i> مالکین  </a></li>
+                        </ul>
+
+                    </li>
+                    @{
+                        //var IsRole = await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "UserList");
+
+                        //if (SignInManager.IsSignedIn(User) && User.IsInRole("UserList"))
+                        //{
+                        //    <li class="sub-menu">
+                        //        <a href="javascript:;" class="">
+                        //            <i class="icon-user"></i>
+                        //            <span>مدیریت کاربران</span>
+                        //            <span class="arrow"></span>
+                        //        </a>
+                        //        <ul class="sub">
+
+                        //            <li><a class="" asp-area="" asp-controller="User" asp-action="Index">لیست کاربران</a></li>
+
+                        //        </ul>
+                        //    </li>
+                        //}
+                    }
+
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+                <!-- page start-->
+                @RenderBody()
+
+                <!-- page end-->
+            </section>
+        </section>
+        <!--main content end-->
+    </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="~/AdminPanel/js/jquery.js"></script>
+    <script src="~/adminpanel/js/jquery-ui.min.js"></script>
+    <script src="~/AdminPanel/js/bootstrap.min.js"></script>
+    <script src="~/AdminPanel/js/jquery.scrollTo.min.js"></script>
+
+
+
+    <script type="text/javascript" src="~/AdminPanel/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="~/AdminPanel/assets/bootstrap-daterangepicker/date.js"></script>
+    <script type="text/javascript" src="~/AdminPanel/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script type="text/javascript" src="~/AdminPanel/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+
+    <script src="~/AdminPanel/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="~/Select2/select2.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/AdminPanel/assets/data-tables/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="~/AdminPanel/assets/data-tables/DT_bootstrap.js"></script>
+    <script type="text/javascript" src="~/js/PrintJS.js"></script>
+
+    <script src="~/AdminPanel/DatePicker/jalalidatepicker.js"></script>
+
+
+
+    <!--common script for all pages-->
+    <script src="~/AdminPanel/js/common-scripts.js"></script>
+    <!--script for this page only-->
+    <script src="~/AdminPanel/js/dynamic-table.js"></script>
+    @await RenderSectionAsync("Scripts",required:false)
+    <script>
+        $(document).ready(function () {
+            $('#BtnBack').on('click', function (e) {
+                window.history.back();
+            });
+        });
+        $(".statesSelect").select2();
+        //JalaliDatPicker
+        jalaliDatepicker.startWatch({
+
+            changeMonthRotateYear: true,
+            showTodayBtn: true,
+            showEmptyBtn: true,
+            topSpace: 10,
+            bottomSpace: 30,
+            dayRendering(opt, input) {
+                return {
+                    isHollyDay: opt.day == 1
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

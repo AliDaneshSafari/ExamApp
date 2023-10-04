@@ -1,0 +1,105 @@
+﻿@model IEnumerable<ExamApp.Trackers>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+@*    <partial name="_EmployeePartial" />
+*@    <div class="col-md-12">
+        <section class="panel">
+            <header class="panel-heading panel-color">
+                <span>لیست صادره ها</span>
+                <span style="float:left"><a href="/">بازگشت</a></span>
+            </header>
+            <div class="panel-body">
+                <span>
+                    @Html.Raw( TempData["messages"])
+                </span>
+                <table class="table table-striped table-advance table-hover table-bordered" id="sample_1">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CreateDate)
+                            </th>
+                           
+                            <th>
+
+                                <a asp-action="Create" class="btn btn-primary btn-sm">ثبت صادره جدید </a>
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @*<img src="/Images/@item.ImagePath" style="width:50px;">*@
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreateDate)
+                                </td>
+                                
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-white  btn-xs">گزینه ها</button>
+                                        <button type="button" class="btn btn-white  btn-xs dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" style="margin-right:-83px;">
+                                            <li>
+                                                <a asp-action="Edit" asp-route-id="@item.Id">
+                                                    <i class="icon-edit"></i> ویرایش
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a asp-action="Details" asp-route-id="@item.Id">
+                                                    <i class="icon-eye-open"></i> جزئیات
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" onclick="Delete(@item.Id)">
+                                                    <i class="icon-remove"></i> حذف
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a asp-action="PaidSalary" asp-route-id="@item.Id">
+                                                    <i class="icon-dollar"></i> پرداخت معاش
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a asp-action="AdvanceSalary" asp-route-id="@item.Id">
+                                                    <i class="icon-dollar"></i> پیش پرداخت
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+    </div>
+</div>
+
+
+<partial name="_PartialModal" />
+
+@section Scripts{
+    <script>
+        function Delete(id) {
+            $.get("/Admin/Employee/Delete/" + id, function (res) {
+                $("#myModalId").modal("show");
+                $("#myModalTitleId").html("حذف");
+                $("#myModalBodyId").html(res);
+            })
+        };
+
+    </script>
+    }

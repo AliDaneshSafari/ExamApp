@@ -1,0 +1,89 @@
+﻿
+
+@model IEnumerable<ExamApp.Department>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <section class="panel">
+            <header class="panel-heading panel-color">
+                <span>لیست دیپارتمنت ها</span>
+                <span style="float:left"><a href="/">بازگشت</a></span>
+            </header>
+            <div class="panel-body">
+                <span>
+                    @Html.Raw( TempData["SuccessMessage"])
+                </span>
+                <table class="table table-striped table-advance table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                
+                               <a onclick="Create()" class="btn btn-primary btn-sm">دیپارتمنت جدید</a>
+                           
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+
+                                    <a onclick="Edit(@item.Id)" class="btn btn-primary btn-sm"><i class="icon-pencil"> </i> ویرایش </a>
+
+                                    <a onclick="Delete(@item.Id)" class="btn btn-danger btn-sm"><i class="icon-trash "></i> حذف</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+            </section>
+        </div>
+    </div>
+
+
+<partial name="_PartialModal" />
+
+@section Scripts{
+<script>
+    function Create(id) {
+        $.get("/Department/Create/" + id, function (res) {
+            $("#myModalId").modal("show");
+            $("#myModalTitleId").html("افزودن");
+            $("#myModalBodyId").html(res);
+        })
+    };
+    function Delete(id) {
+            $.get("/Department/Delete/" + id, function (res) {
+            $("#myModalId").modal("show");
+            $("#myModalTitleId").html("حذف");
+            $("#myModalBodyId").html(res);
+        })
+    };
+    function Edit(id) {
+        $.get("/Department/Edit/" + id, function (res) {
+            $("#myModalId").modal("show");
+            $("#myModalTitleId").html("تصحیح");
+            $("#myModalBodyId").html(res);
+        })
+    };
+</script>
+    }
