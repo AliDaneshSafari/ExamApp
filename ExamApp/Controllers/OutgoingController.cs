@@ -18,7 +18,7 @@ namespace ExamApp.Controllers
         }
         public IActionResult Index()
         {
-            return View(_contxt.trackers.Include(t=>t.atachFiles).ToList());
+            return View(_contxt.trackers.Include(t=>t.atachFiles).Where(t=>t.SenderId>0).ToList());
         }
         public IActionResult Create()
         {

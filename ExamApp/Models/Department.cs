@@ -8,5 +8,6 @@ namespace ExamApp
         public int Id { get; set; }
         [Required] 
         public string Name { get; set; }
+        public List<Trackers> Trackers { get; set; }    
     }
 }

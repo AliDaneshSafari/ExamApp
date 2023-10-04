@@ -1,0 +1,101 @@
+﻿@model ExamApp.Trackers
+
+@*@inject SignInManager<ApplicationUser> SignInManager
+*@<style>
+      .rightDir {
+          text-align: right
+      }
+</style>
+@*<partial name="_EmployeePartial" />*@
+<div class="col-md-12 col-lg-12 col-sm-12 col-sx-12">
+
+    <section class="panel">
+        <header class="panel-heading panel-color">
+            <span>
+                بخش تائید از طرف رئیس مربوطه
+            </span>
+            <span style="float:left">
+                <a asp-action="Index" class="btn btn-primary btn-xs"><i class="icon-reply"></i> بازگاشت</a>
+
+            </span>
+        </header>
+        <div class="panel-body">
+
+            <form asp-action="Approve" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+                <div class="row">
+                    <div class="col-md-4">
+                        
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group has-success">
+                            <label asp-for="In_Number" class="control-label"></label>
+                            <input asp-for="In_Number" class="form-control" readonly autocomplete="off" required />
+                            <span asp-validation-for="In_Number" class="text-danger"></span>
+                        </div>
+                    </div>
+     
+
+                    <div class="col-md-4">
+
+                        <div class="form-group has-success">
+                            <label asp-for="In_Date" class="control-label"></label>
+                            <input asp-for="In_Date" class="form-control" readonly autocomplete="off" required />
+                            <span asp-validation-for="In_Date" class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+
+                        <div class="form-group has-success">
+                            <label asp-for="Subject" class="control-label"></label>
+                            <textarea asp-for="Subject" class="form-control" required autocomplete="off"></textarea>
+                            <span asp-validation-for="Subject" class="text-danger"></span>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+                <div class="row">
+
+                
+                    <div class="col-md-12">
+
+                        <div class="form-group has-success">
+                            <label asp-for="AssignRemark" class="control-label"></label>
+                            <textarea asp-for="AssignRemark" class="form-control" autocomplete="off"></textarea>
+                            <span asp-validation-for="AssignRemark" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-xl-6 col-sm-2">
+                        <div class="form-group">
+                            <input type="submit" value="ثبت شود" class="btn btn-success btn-sm" />
+                            <a asp-action="Index" class="btn btn-primary btn-sm">بازگشت</a>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+
+
+        </div>
+    </section>
+
+</div>
+@section Scripts {
+    <script src="~/js/PriviewImage.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

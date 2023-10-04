@@ -26,6 +26,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Utility\" />
+    <Folder Include="ViewModel\" />
     <Folder Include="wwwroot\UploadFiles\" />
   </ItemGroup>
 

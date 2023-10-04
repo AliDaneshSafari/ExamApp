@@ -47,7 +47,18 @@ namespace ExamApp
         [Display(Name = "وضعیت مکتوب ")]
         public bool? isApprove { get; set; } = false;
        
-        public List<AtachFile> atachFiles { get; set; } 
+        public List<AtachFile> atachFiles { get; set; }
+
+
+        [Display(Name = "کامنت رئیس یا وزیر  ")]
+
+        public string? AssignRemark { get; set; } = null;
+
+
+
+        [Display(Name = "نمر ارشیف  ")]
+
+        public string? ArchiveNumber { get; set; } = null;
 
 
 
